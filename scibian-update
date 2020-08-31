@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Gestion des couleurs 
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+
+sLogFile=/tmp/scibian-update.log
+aDateFile=(/var/lib/apt/periodic/upgrade-stamp /var/lib/apt/periodic/unattended-upgrades-stamp $sLogFile)
+iDateLast=0
+for v in ${aDateFile[*]}; do
+	if [ -e $v ]; then
+		tiDate=`stat --format "%Y" $v`
+		if [ $iDateLast -lt $tiDate ];then
+			iDateLast=$tiDate
+		fi
+	fi
+done
+
+sLastUpdate=`date -d @$iDateLast`
+echo -e " Dernière mise à jour réalisée le : ${BLUE} ${sLastUpdate} ${NC}"
+echo -e " ${RED}Merci de laisser le poste connecté au réseau jusqu'à la fin de la mise à jour ${NC}"
+
+read -p "voulez vous déclencher la mise à jour maintenant ? (o/n)" ISOK
+
+if [ ! $ISOK ];
+then 
+	exit;
+fi
+
+if [ $ISOK != "o" ]; then
+	exit;
+fi
+echo -e "\n"
+echo -e  "installation en cours..."
+
+sudo unattended-upgrade
+echo -e "\n"
+echo -e "${GREEN} Utilisez la touche 'entrer' pour terminer le programme.${NC}"; read

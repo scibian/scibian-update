@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=scibian mise à jour
+GenericName=scibian mise à jour
+
+Type=Application
+Exec=gnome-terminal --hide-menubar -- /usr/bin/scibian-update
+Terminal=true
+Keywords=Scibian Update;
+Icon=system-software-update
+Categories=Application
+Actions=Manager;
+Comment=Lance la mise à jour de Scibian

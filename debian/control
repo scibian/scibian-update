@@ -1,0 +1,11 @@
+Source: scibian-update
+Section: edf
+Priority: extra
+Maintainer: Scibian Packaging Team <packaging@edf.fr>
+Build-Depends: debhelper (>= 9.0.0)
+Standards-Version: 1.0
+
+Package: scibian-update
+Architecture: all
+Depends: apt
+Description: Icone permettant de lancer la mise à jour de Scibian.
